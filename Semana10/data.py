@@ -3,7 +3,7 @@ import csv
 
 def export_file(database):
     headers=('Nombre','Sección','Nota Español','Nota Inglés','Nota Estudios Sociales','Nota Ciencias','Promedio')
-    file_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/ExportStudents.txt"
+    file_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/ExportStudents.csv"
     try:
         if database!=[]:
             with open(file_path,mode='w',encoding='utf-8') as file:
@@ -18,10 +18,8 @@ def export_file(database):
 
 
 
-def import_file(my_boolean):
-    file_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/ExportStudents.txt"
-    new_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/Estudiantes.csv"
-    headers=('Nombre','Sección','Nota Español','Nota Inglés','Nota Estudios Sociales','Nota Ciencias','Promedio')
+def import_file(my_boolean,my_list):
+    file_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/ExportStudents.csv"
 
     my_csv_file=[]
     try:
@@ -32,10 +30,7 @@ def import_file(my_boolean):
                     reader=csv.DictReader(file)
                     for row in reader:
                         my_csv_file.append(row)
-                with open(new_path,mode='w',encoding='utf-8') as file:
-                    writer=csv.DictWriter(file,headers)
-                    writer.writeheader()
-                    writer.writerows(my_csv_file)
+                my_list=my_csv_file
                 print("Archivo Importado con Éxito")
             if str_confirm=="N":
                 print("Ejecución de Importar cancelada con éxito")

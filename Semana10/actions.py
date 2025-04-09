@@ -1,21 +1,14 @@
 import csv
 
 
-def open_csvfile():
-    my_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/Estudiantes.csv"
-    my_csv_file=[]
-    with open(my_path,'r',encoding='utf-8') as file:
-        reader=csv.DictReader(file)
-        for row in reader:
-            my_csv_file.append(row)
-    return my_csv_file
+def open_csvfile(my_list):
+    return my_list
 
     
-def input_information():
+def input_information(students_info):
     grades_dict={}
     students_header=['Nombre','Sección','Nota Español','Nota Inglés','Nota Estudios Sociales','Nota Ciencias']
     students_info_values=[]
-    students_info=[]
     index=0
     counter=0
     sum=0
@@ -29,7 +22,7 @@ def input_information():
     while counter<=3:
         try:
             
-            my_variable=int(input(f'Ingrese por favor la Nota de {signatures_names[counter]} : '))
+            my_variable=int(input(f'Ingrese por favor la Nota de {signatures_names[counter]}{counter}: '))
             if my_variable>100 or my_variable<0:
                 #print(f'{int_grades[index]}{index}')
                 raise Exception
@@ -51,7 +44,7 @@ def input_information():
     grades_dict['Promedio']=(sum/4)
     students_header.append('Promedio')
     students_info.append(grades_dict)
-    write_in_file(students_info,students_header)
+    print("Estudiante almacenado con Éxito")
 
 
 def sorting_top3students(my_list):
@@ -88,21 +81,3 @@ def calculate_total_average(my_list):
             raise Exception
     except Exception as error:
         print("La Operación no se puede realizar no hay archivos o estudiantes registrados en el sistema")
-    
-    
-
-def write_in_file(my_list,headers):
-    new_path="C:/Users/default.LAPTOP-SHSSKNRP/OneDrive/INVERSIONES/Escritorio/Programas/Semana10/DUAD_My-Tech-Transformation-Journal/Semana10/Estudiantes.csv"
-    if open_csvfile()==[]:
-        with open(new_path,mode='w',encoding='utf-8') as file:
-            writer=csv.DictWriter(file,headers)
-            writer.writeheader()
-            writer.writerows(my_list)
-    else:
-        with open(new_path,mode='a',encoding='utf-8') as file:
-            writer=csv.DictWriter(file,headers)
-            writer.writerows(my_list)
-
-    print("Información de Estudiante almacenada correctamente")
-
-    
