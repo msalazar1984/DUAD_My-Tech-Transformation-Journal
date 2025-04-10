@@ -29,7 +29,8 @@ def import_file(my_list):
                     reader=csv.DictReader(file)
                     for row in reader:
                         my_csv_file.append(row)
-                    my_list=my_csv_file
+                    for my_element in my_csv_file:
+                        my_list.append(my_element)
                     print("Archivo Importado con Éxito")
             if str_confirm=="N":
                 print("Ejecución de Importar cancelada con éxito")
