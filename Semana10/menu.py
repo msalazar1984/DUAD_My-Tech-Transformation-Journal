@@ -1,7 +1,7 @@
 import actions,data
 
 
-def menu():
+def menu(my_saved_list):
     num_option=0
     my_boolean=False
     system_on=True
@@ -10,21 +10,21 @@ def menu():
         try:
             num_option=int(input("Ingrese por favor el número de Opción que desea ingresar. 1-Ingresar información de estudiante, 2-Ver Información de Estudiantes, 3-TOP3 Promedios, 4-Ver Promedio Total, 5-Exportar archivo, 6-Importar archivo previamente exportado, 7-Salir del Programa"))
             if num_option==1:
-                actions.input_information()
+                actions.input_information(my_saved_list)
             elif num_option==2:
-                print(actions.open_csvfile())
+                print(actions.open_csvfile(my_saved_list))
             elif num_option==3:
-                print(actions.sorting_top3students(actions.open_csvfile()))
+                print(actions.sorting_top3students(my_saved_list))
             elif num_option==4:
-                actions.calculate_total_average(actions.open_csvfile())
+                actions.calculate_total_average(my_saved_list)
             elif num_option==5:
-                data.export_file(actions.open_csvfile())
-                if actions.open_csvfile()!=[]:
+                data.export_file(my_saved_list)
+                if my_saved_list!=[]:
                     my_boolean=True
                 else:
                     my_boolean=False
             elif num_option==6:
-                data.import_file(my_boolean)
+                data.import_file(my_boolean,my_saved_list)
                 my_boolean=False
             elif num_option==7:
                 system_on=False

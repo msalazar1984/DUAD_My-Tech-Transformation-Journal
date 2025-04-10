@@ -1,5 +1,6 @@
 import menu
 
 def main():
-    menu.menu()
+    my_saved_list=[]
+    menu.menu(my_saved_list)
 main()
