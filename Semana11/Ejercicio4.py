@@ -34,21 +34,21 @@ class Feet():
 
 class Human():
     def __init__(self):
-        right_hand=Hand()
-        left_hand=Hand()
+        self.right_hand=Hand()
+        self.left_hand=Hand()
 
-        right_arm=Arm(right_hand)
-        left_arm=Arm(left_hand)
+        self.right_arm=Arm(self.right_hand)
+        self.left_arm=Arm(self.left_hand)
 
-        right_feet=Feet()
-        left_feet=Feet()
+        self.right_feet=Feet()
+        self.left_feet=Feet()
 
-        right_leg=Leg(right_feet)
-        left_leg=Leg(left_feet)
+        self.right_leg=Leg(self.right_feet)
+        self.left_leg=Leg(self.left_feet)
 
-        head=Head()
+        self.head=Head()
 
-        torso=Torso(head,right_arm,left_arm,right_leg, left_leg)
+        self.torso=Torso(self.head,self.right_arm,self.left_arm,self.right_leg, self.left_leg)
 
         print("Hello. I'm a Human!!!")
 
