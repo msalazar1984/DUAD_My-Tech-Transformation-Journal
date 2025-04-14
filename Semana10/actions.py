@@ -55,7 +55,7 @@ def sorting_top3students(my_list):
     
     try:
         if my_list!=[] and len(my_list)>=3:
-            my_list.sort(key=lambda x: x['Promedio'],reverse=True)
+            my_list.sort(key=lambda x: x['Promedio:'],reverse=True)
             for item in range(0,3):
                 top_students_name.append(my_list[item]['Nombre'])
                 top_students_average.append(my_list[item]['Promedio'])
