@@ -3,8 +3,7 @@ import math
 
 
 class Shape(ABC):
-        
-
+    @abstractmethod
     def calculate_perimeter(self,constant,large,width):
         self.constant=constant
         self.large=large
@@ -12,7 +11,7 @@ class Shape(ABC):
         my_perymeter=(2*self.constant*self.large)+(2*self.width)
         return my_perymeter
 
-
+    @abstractmethod
     def calculate_area(self,constant,large,width):
         self.constant=constant
         self.large=large
@@ -22,22 +21,48 @@ class Shape(ABC):
     
 
 class Circle(Shape):
-    def __init__(self,radius,pi,width):
+    def __init__(self,radius,pi):
         self.radius=radius
         self.pi=pi
-        self.width=width
     
 
-class Square(Shape):
-    def __init__(self,large,width):
-        self.large=large
-        self.width=width
+    def calculate_area(self):
+        self.my_area=self.radius*self.radius*self.pi
+        return self.my_area
+    
 
+    def calculate_perimeter(self):
+        self.my_perimeter=2*self.radius*self.pi
+        return self.my_perimeter
+
+class Square(Shape):
+    def __init__(self,side):
+        self.side=side
+    
+    
+    def calculate_area(self):
+        self.my_area=self.side*self.side
+        return self.my_area
+
+    
+    def calculate_perimeter(self):
+        self.my_perimeter=4*self.side
+        return self.my_perimeter
 
 class Rectangle(Shape):
     def  __init__(self,large,width):
         self.large=large
         self.width=width
+    
+
+    def calculate_area(self):
+        self.my_area=self.large*self.width
+        return self.my_area
+    
+
+    def calculate_perimeter(self):
+        self.my_perimeter=2*self.large+2*self.width
+        return self.my_perimeter
 
 
 def my_results():
@@ -52,9 +77,9 @@ def my_results():
                     if my_radius<0:
                         raise Exception
                     else:
-                        my_circle=Circle(my_radius,math.pi,0)
-                        print(f'El Perimetro de mi Círculo es de: {my_circle.calculate_perimeter(my_circle.pi,my_circle.radius,my_circle.width)}')
-                        print(f'El Area de mi Círculo es de: {my_circle.calculate_area(my_circle.pi,my_circle.radius,my_circle.radius)}')
+                        my_circle=Circle(my_radius,math.pi)
+                        print(f'El Perimetro de mi Círculo es de: {my_circle.calculate_perimeter()}')
+                        print(f'El Area de mi Círculo es de: {my_circle.calculate_area()}')
                 except ValueError:
                     print("No se pueden recibir letras")
                 except Exception as err:
@@ -62,13 +87,13 @@ def my_results():
         
             elif my_operation_number==2:
                 try:
-                    my_large=int(input("Ingrese Por Favor la medida del lado del Cuadrado al que le desea calcular el área y el perimetro: "))
-                    if my_large<0:
+                    my_side=int(input("Ingrese Por Favor la medida del lado del Cuadrado al que le desea calcular el área y el perimetro: "))
+                    if my_side<0:
                         raise Exception
                     else:
-                        my_square=Square(my_large,my_large)
-                        print(f'El Perimetro de mi Cuadrado es de: {my_square.calculate_perimeter(1,my_square.large,my_square.width)}')
-                        print(f'El Area de mi Cuadrado es de: {my_square.calculate_area(1,my_square.large,my_square.large)}')
+                        my_square=Square(my_side)
+                        print(f'El Perimetro de mi Cuadrado es de: {my_square.calculate_perimeter()}')
+                        print(f'El Area de mi Cuadrado es de: {my_square.calculate_area()}')
                 except ValueError:
                     print("No se pueden recibir letras")
                 except Exception as err:
@@ -82,8 +107,8 @@ def my_results():
                         raise Exception
                     else:
                         my_rectangle=Rectangle(my_large,my_width)
-                        print(f'El Perimetro de mi Rectángulo es de: {my_rectangle.calculate_perimeter(1,my_rectangle.large,my_rectangle.width)}')
-                        print(f'El Area de mi Rectángulo es de: {my_rectangle.calculate_area(1,my_rectangle.large,my_rectangle.width)}')
+                        print(f'El Perimetro de mi Rectángulo es de: {my_rectangle.calculate_perimeter()}')
+                        print(f'El Area de mi Rectángulo es de: {my_rectangle.calculate_area()}')
                 except ValueError:
                     print("No se pueden recibir letras")
                 except Exception as err:
