@@ -6,8 +6,6 @@ class Contact():
 
 
 class Agenda(Contact):
-
-
     def __init__(self):
         self.my_agenda=[]
         self.person=[]
@@ -15,7 +13,10 @@ class Agenda(Contact):
         self.my_contact_header=['Nombre:','Apellido:','Numero de Telefono:']
     
     
-    def adding_contacts(self):
+    def adding_contacts(self,name,lastname,phonenumber):
+        self.name=name
+        self.lastname=lastname
+        self.phonenumber=phonenumber
         self.person.append(self.name,self.lastname,self.phonenumber)
         for item in self.my_contact_header:
             self.my_contact[item]=self.person[index]
@@ -28,12 +29,10 @@ class Agenda(Contact):
 
 
 class Message(Agenda):
-    
     def sending_message(self,body_message,phone_number):
         self.body_message=body_message
         self.phone_number=phone_number
         print(f'Estoy enviando el mensaje: {self.body_message} al numero: {self.phone_number}')
-
 
 
 class Phone(Agenda):
@@ -54,19 +53,20 @@ class File():
         self.file_number=file_number
     
 
+
 class AudioPlayer(File):
-    def reproduce_audio(audiofile):
+    def reproduce_audio(self,audiofile):
         print(f'I am reproducing the{audiofile.name}')
 
 
 class VideoPlayer(File):
-    def reproduce_video(videofile):
+    def reproduce_video(self,videofile):
         print(f'I am reproducing the{videofile.name}')
 
 
 class Camera(File):
-    def activate_camera():
-        print()
+    def activate_camera(self):
+        print("Hola Soy una camara")
 
 
 class Storage(File):
@@ -90,6 +90,7 @@ class Device(Phone,AudioPlayer,VideoPlayer,Camera,Message):
         self.is_signal=signal_on
         self.batery_on=batery_on
     
+
     def execute_instruction(self,my_device):
         self.my_device=my_device
 
@@ -99,7 +100,6 @@ def main():
     signal_is_on=True
     batery_is_on=True
     my_device=Device(phone_is_on,signal_is_on,batery_is_on)
-
     while phone_is_on==True:
         try:
             my_instruction=int(input("Por favor ingrese un comando. 1.Encender Movil, 2.Realizar Llamada, 3. Enviar SMS, 4.Apagar Movil"))
