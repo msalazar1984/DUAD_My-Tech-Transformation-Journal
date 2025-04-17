@@ -4,20 +4,12 @@ import math
 
 class Shape(ABC):
     @abstractmethod
-    def calculate_perimeter(self,constant,large,width):
-        self.constant=constant
-        self.large=large
-        self.width=width
-        my_perymeter=(2*self.constant*self.large)+(2*self.width)
-        return my_perymeter
+    def calculate_perimeter(self):
+        pass
 
     @abstractmethod
-    def calculate_area(self,constant,large,width):
-        self.constant=constant
-        self.large=large
-        self.width=width
-        my_area=(constant*large*width)
-        return my_area
+    def calculate_area(self):
+        pass
     
 
 class Circle(Shape):
