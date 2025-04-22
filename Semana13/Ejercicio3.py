@@ -27,7 +27,6 @@ def decorator_with_arguments(function):
             print(function(my_user))
     return wrapper
 
-
 @decorator_with_arguments
 def processed_age(user):
     my_result=f'La edad del Usuario es de {user.my_age} y se le permite proceder'
