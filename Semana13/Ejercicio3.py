@@ -18,13 +18,15 @@ class User():
 
 def decorator_with_arguments(function):
     def wrapper(my_user):
-        if my_user.my_age<18:
-            try:
+        try:
+            if my_user.my_age<18:
                 raise err
-            except Exception as err:
-                print(f'El usuario tiene {my_user.my_age} es menor de edad y por lo tanto no puede proceder')
-        else:
-            print(function(my_user))
+            else:
+                my_result=(function(my_user))
+                print(my_result)
+        except Exception as err:
+            print(f'El usuario tiene {my_user.my_age} es menor de edad y por lo tanto no puede proceder')
+
     return wrapper
 
 @decorator_with_arguments
