@@ -8,7 +8,7 @@ def decorator_with_arguments(function):
                     my_boolean=False
                     raise err  
             except Exception as err:
-                print(f'No todos los valores son numericos')
+                print(f'No all values are numeric')
                 break
         if my_boolean==True:
             my_result=function(*args,**kargs)
@@ -18,7 +18,7 @@ def decorator_with_arguments(function):
 
 @decorator_with_arguments
 def processing_result(*args,**kargs):
-        str_result=f'Proceso completado con exito, todos los valores son numeros'
+        str_result=f'Process successfully completed, all values are numbers'
         return str_result
 
 
@@ -27,9 +27,9 @@ def main():
     my_list=[]
     while my_booleano==True:
         try:
-            int_menu=int(input("Ingrese por favor una opción válida 1. Ingresar elemento 2. Procesar elementos 3. Salir del Programa"))
+            int_menu=int(input("Please type an option 1. Type an item 2. Process items 3. Exit program"))
             if int_menu==1:
-                new_element=input("Ingrese por favor un nuevo elemento: ")
+                new_element=input("Type please an item: ")
                 my_list.append(new_element)
             elif int_menu==2:
                 processing_result(*my_list)
@@ -38,9 +38,9 @@ def main():
             if int_menu<1 or int_menu>3:
                 raise err
         except ValueError:
-            print("El Menu solo puede recibir valores numericos")
+            print("Menu only can read numbers")
         except Exception as err:
-            print(f'En el Menu solo estan disponibles opciones entre 1 y 3')
+            print(f'Please type an option between 1 and 3')
 
 main()
 

@@ -25,13 +25,13 @@ def decorator_with_arguments(function):
                 my_result=(function(my_user))
                 print(my_result)
         except Exception as err:
-            print(f'El usuario tiene {my_user.my_age} es menor de edad y por lo tanto no puede proceder')
+            print(f'User is {my_user.my_age} years old is under age and cannot proceed')
 
     return wrapper
 
 @decorator_with_arguments
 def processed_age(user):
-    my_result=f'La edad del Usuario es de {user.my_age} y se le permite proceder'
+    my_result=f'User is {user.my_age} years old and He/She can proceed'
     return (my_result)
 
 
@@ -39,12 +39,12 @@ def main():
     my_boolean=True
     while my_boolean==True:
         try:
-            int_operation_menu=int(input("Ingrese por favor la opcion con la que desea proceder 1. Ingresar Fecha de Nacimiento (Dia-Mes-Año), 2. Proceder con la validacion, 3.Salir del Programa"))
+            int_operation_menu=int(input("Please type an option 1. Type date of birth(Day-Month-Year), 2. Validate input, 3.Exit program"))
             if int_operation_menu==1:
                 try:
-                    int_dayofbirth=int(input("Ingrese Por Favor el Día de Nacimiento (Solo se permiten valores entre 1 y 31): "))
-                    int_monthofbirth=int(input("Ingrese Por Favor el Mes de Nacimiento (Solo se permiten valores entre 1 y 12): "))
-                    int_yearofbirth=int(input("Ingrese Por Favor el Año de Nacimiento: (No se pueden ingresar valores mayores al año de la fecha de hoy): "))
+                    int_dayofbirth=int(input("Please enter day of birth (Only values between 1 and 31 are allowed): "))
+                    int_monthofbirth=int(input("Please enter month of birth (only values between 1 and 12 are allowed): "))
+                    int_yearofbirth=int(input("Please enter year of birth: (values cannot be greater than today's date): "))
                     
                     if int_dayofbirth<1 or int_dayofbirth>31:
                         raise err_day
@@ -54,13 +54,13 @@ def main():
                         raise err_year
                     
                 except ValueError:
-                    print("Los dias, meses o años solo pueden tener valores numericos no se permiten letras")
+                    print("Days, months or years only can be numbers, any other character is not allowed")
                 except Exception as err_day:
-                    print("Los dias solo pueden ser valores entre 1 y 31")
+                    print("Day of birth only can be values between 1 and 31")
                 except Exception as err_month:
-                    print("Los meses solo pueden ser valores entre 1 y 12")
+                    print("Month of birth only can be values between 1 and 12")
                 except Exception as err_year:
-                    print("El valor del año es incorrecto, la fecha no puede ser mayor a la fecha de hoy")
+                    print("Year of birth is incorrect, date of birth cannot be greater than today's date")
         
             if int_operation_menu==2:
                 #print(f'{int_dayofbirth}{int_monthofbirth}{int_yearofbirth}')
@@ -68,15 +68,15 @@ def main():
                     my_user=User(int_dayofbirth,int_monthofbirth,int_yearofbirth)
                     processed_age(my_user)
                 except ValueError:
-                    print("Fecha no se puede procesar hay un error en los valores ingresados defina una nueva fecha")
+                    print("Date of birth cannot be proceed there is an error in typed values, please enter a new date of birth")
             elif int_operation_menu==3:
                 my_boolean=False
             if int_operation_menu<1 or int_operation_menu>3:
                 raise err_menu
         except ValueError:
-            print(f'El Menú solo recibe valores numéricos no se permiten letras')
+            print(f'Menu only read numbers, letters are invalid characters')
         except Exception as err_menu:
-            print(f'En el Menú solo se permiten valores entre 1 y 3')
+            print(f'Please type an option between 1 and 3')
 
 
 main()
