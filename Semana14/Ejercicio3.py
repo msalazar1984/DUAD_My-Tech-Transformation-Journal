@@ -14,17 +14,18 @@ class Bynary_Tree():
     def __init__(self,root):
         self.root=root
         
-
     def print_structure(self,node):
+            if self.root is None:
+                print("Binary Tree does not have a root, tree cannot be display")
             if node is not None:
                 current_node=node
                 if current_node.next_left is not None:
                     print(f'Im the father: {current_node.data} and Im his son: {current_node.next_left.data}')
                 if current_node.next_right is not None:
                     print(f'Im the father: {current_node.data} and Im his son: {current_node.next_right.data}')
-
                 self.print_structure(current_node.next_left)
                 self.print_structure(current_node.next_right)
+            
 
 ninth_node=Node("ninth_node")
 eighth_node=Node("eighth_node",ninth_node)
