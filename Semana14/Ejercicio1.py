@@ -18,6 +18,8 @@ class Queue:
         while current_node is not None:
             print(current_node.data)
             current_node = current_node.next
+        if self.head is None:
+            print("Dear user the stack is Empty")
 
     def push(self, new_node):
         current_node=new_node
@@ -30,26 +32,23 @@ class Queue:
         if self.head:
             self.head = self.head.next
 
-first_node=Node("Hola")
+
+first_node=Node("Hello")
 myqueue=Queue(first_node)
 #myqueue.print_structure()
 
-second_node=Node("Mundo")
+second_node=Node("World")
 myqueue.push(second_node)
 #myqueue.print_structure()
 
-tird_node=Node("Esto")
-myqueue.push(tird_node)
+third_node=Node("This")
+myqueue.push(third_node)
 #myqueue.print_structure()
 
 myqueue.pop()
 #myqueue.print_structure()
+myqueue.pop()
 
 myqueue.pop()
-#myqueue.print_structure()
 
-myqueue.pop()
-myqueue.print_structure()
-
-myqueue.pop()
 myqueue.print_structure()
