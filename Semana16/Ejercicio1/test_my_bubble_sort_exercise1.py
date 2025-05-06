@@ -3,6 +3,7 @@ from exercice1 import my_bubble_sort
 def test_my_bubble_sort_with_small_list():
     #Arrange
     input_list=[35,2]
+    #Act
     my_bubble_sort(input_list)
     result_list=[2,35]
     #Assert
@@ -12,9 +13,9 @@ def test_my_bubble_sort_with_small_list():
 def test_my_bubble_sort_with_large_list():
     #Arrange
     input_list=[682,524,468,625,307,231,416,740,108,256,53,980,153,571,48,61,75,599,678,931,681,91,167,255,634,505,522,201,891,407,952,672,148,544,649,351,85,64,509,959,518,228,329,459,456,527,710,299,143,281,368,954,267,193,982,828,556,109,372,620,768,298,622,226,645,445,426,398,296,900,43,319,497,464,276,642,789,332,573,428,783,127,40,991,540,603,746,287,428,238,744,287,431,196,212,406,836,192,369,773,472,282,337,939,551,968,869,135,703,33,89,449,882,844,670,125,660,180,376,500,593,671,728,378,466,521,186,264,479,583,376,590,391,258,625,740,146,105]
+    #Act
     my_bubble_sort(input_list)
     result_list=[33,40,43,48,53,61,64,75,85,89,91,105,108,109,125,127,135,143,146,148,153,167,180,186,192,193,196,201,212,226,228,231,238,255,256,258,264,267,276,281,282,287,287,296,298,299,307,319,329,332,337,351,368,369,372,376,376,378,391,398,406,407,416,426,428,428,431,445,449,456,459,464,466,468,472,479,497,500,505,509,518,521,522,524,527,540,544,551,556,571,573,583,590,593,599,603,620,622,625,625,634,642,645,649,660,670,671,672,678,681,682,703,710,728,740,740,744,746,768,773,783,789,828,836,844,869,882,891,900,931,939,952,954,959,968,980,982,991]
-
     #Assert
     assert input_list==result_list
 
@@ -22,9 +23,9 @@ def test_my_bubble_sort_with_large_list():
 def test_my_bubble_sort_with_empty_list():
     #Arrange
     input_list=[]
+    #Act
     my_bubble_sort(input_list)
     result_list=[]
-
     #Assert
     assert input_list==result_list
 
@@ -32,8 +33,8 @@ def test_my_bubble_sort_with_empty_list():
 def test_my_bubble_sort_with_string():
     #Arrange
     input_list="17,2,4,67,45,3"
-    my_bubble_sort(input_list)
-    result_list=[2,3,4,17,45,67]
-
+    #Act
+    my_processed_list=my_bubble_sort(input_list)
+    result_list=None
     #Assert
-    assert input_list==result_list
+    assert my_processed_list==result_list
