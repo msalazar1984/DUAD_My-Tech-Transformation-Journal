@@ -1,4 +1,5 @@
 from exercice1 import my_bubble_sort
+import pytest
 
 def test_my_bubble_sort_with_small_list():
     #Arrange
@@ -34,7 +35,5 @@ def test_my_bubble_sort_with_string():
     #Arrange
     input_list="17,2,4,67,45,3"
     #Act
-    my_processed_list=my_bubble_sort(input_list)
-    result_list=None
-    #Assert
-    assert my_processed_list==result_list
+    with pytest.raises(TypeError):
+        my_bubble_sort(input_list)
