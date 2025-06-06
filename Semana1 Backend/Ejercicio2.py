@@ -23,9 +23,14 @@ class ItemAPI(MethodView):
         return filtered_task
 
 
-    def post(self,identifier,title,description,status):
+    def post(self):
         try:
             index=0
+            identifier=request.form.get('Identificador')
+            title=request.form.get('Titulo')
+            description=request.form.get('Descripcion')
+            status=request.form.get('Estado')
+
             headers=["Identificador","Titulo","Descripcion","Estado"]
             task_values=[identifier,title,description,status]
             tasks_dictionary={}
@@ -47,7 +52,7 @@ class ItemAPI(MethodView):
                 tasks_dictionary[item]=task_values[index]
                 index+=1
     
-                my_tasks_list.append(tasks_dictionary)
+            my_tasks_list.append(tasks_dictionary)
 
             return my_tasks_list
         except ValueError as ex:
@@ -55,8 +60,11 @@ class ItemAPI(MethodView):
         except Exception as err:
             return jsonify(message="This value already exists in the file!!!"),400
 
-    def put(self,identifier,field_name,new_value):
+    def put(self):
         my_boolean=False
+        identifier=request.form.get('Identificador')
+        field_name=request.form.get('Nombre_campo')
+        new_value=request.form.get('Nuevo_valor')
         try:
             if identifier=="":
                 raise ValueError("Identifier value is missing")
@@ -64,6 +72,13 @@ class ItemAPI(MethodView):
                 raise ValueError("field name value is missing")
             if new_value=="":
                 raise ValueError("New value is missing")
+            if field_name=="Identificador":
+                for record in my_tasks_list:
+                    if record["Identificador"]==new_value:
+                        raise err
+            if field_name=="Estado":
+                if new_value != "Por Hacer" and new_value != "En Progreso" and new_value != "Completada":
+                    raise ValueError("Status value is not valid")
             for record in my_tasks_list:
                 if record["Identificador"]==identifier:
                     record[field_name]=new_value
@@ -74,10 +89,13 @@ class ItemAPI(MethodView):
             return jsonify(message=str(ex)),400
         except Exception as error:
             return jsonify(message=str(error)),400
+        except Exception as err:
+            return jsonify(message="This value already exists in the file!!!"),400
         return my_tasks_list
     
     
-    def delete(self,identifier):
+    def delete(self):
+        identifier=request.form.get('Identificador')
         index=0
         for index in range(0,len(my_tasks_list)):
             if my_tasks_list[index]["Identificador"]==identifier:
@@ -85,10 +103,10 @@ class ItemAPI(MethodView):
         return my_tasks_list
 
 item=ItemAPI.as_view('task_api')
-app.add_url_rule('/get_tasks', view_func=item, methods=['GET'])
-app.add_url_rule('/create_task/<identifier>/<title>/<description>/<status>',view_func=item,methods=['POST'])
-app.add_url_rule('/edit_task/<identifier>/<field_name>/<new_value>',view_func=item,methods=['PUT'])
-app.add_url_rule('/delete_task/<identifier>',view_func=item,methods=['DELETE'])
+app.add_url_rule('/list_tasks', view_func=item, methods=['GET'])
+app.add_url_rule('/task',view_func=item,methods=['POST'])
+app.add_url_rule('/edit_task',view_func=item,methods=['PUT'])
+app.add_url_rule('/delete_task',view_func=item,methods=['DELETE'])
 
 
 if __name__ == '__main__':

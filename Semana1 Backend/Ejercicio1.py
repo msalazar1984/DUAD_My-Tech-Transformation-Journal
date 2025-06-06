@@ -5,8 +5,10 @@ my_tasks_list=[]
 
 app=Flask(__name__)
 
-@app.route("/get_task")
+@app.route("/list_tasks")
 def get_task():
+
+
     try:
         filtered_task=my_tasks_list
         status_filter=request.args.get("Estado")
@@ -21,8 +23,14 @@ def get_task():
     return filtered_task
 
 
-@app.route("/create_task/<identifier>/<title>/<description>/<status>",methods=["POST"])
-def create_task(identifier,title,description,status):
+@app.route("/task",methods=["POST"])
+def create_task():
+
+    identifier=request.form.get('Identificador')
+    title=request.form.get('Titulo')
+    description=request.form.get('Descripcion')
+    status=request.form.get('Estado')
+    
     try:
         index=0
         headers=["Identificador","Titulo","Descripcion","Estado"]
@@ -54,8 +62,12 @@ def create_task(identifier,title,description,status):
     except Exception as err:
         return jsonify(message="This value already exists in the File!!!"),400
 
-@app.route("/edit_task/<identifier>/<field_name>/<new_value>",methods=["PUT"])
-def edit_task(identifier,field_name,new_value):
+@app.route("/edit_task",methods=["PUT"])
+def edit_task():
+    identifier=request.form.get('Identificador')
+    field_name=request.form.get('Nombre_campo')
+    new_value=request.form.get('Nuevo_Valor')
+
     my_boolean=False
     try:
         if identifier=="":
@@ -64,9 +76,13 @@ def edit_task(identifier,field_name,new_value):
             raise ValueError("field name value is missing")
         if new_value=="":
             raise ValueError("New value is missing")
-        
-        
-        
+        if field_name=="Identificador":
+                for record in my_tasks_list:
+                    if record["Identificador"]==new_value:
+                        raise err
+                if field_name=="Estado":
+                    if new_value != "Por Hacer" and new_value != "En Progreso" and new_value != "Completada":
+                        raise ValueError("Status value is not valid")
         for record in my_tasks_list:
             if record["Identificador"]==identifier:
                 record[field_name]=new_value
@@ -77,12 +93,15 @@ def edit_task(identifier,field_name,new_value):
         return jsonify(message=str(ex)),400
     except Exception as error:
         return jsonify(message="Provided value cannot be found!!!!"),400
+    except Exception as err:
+            return jsonify(message="This value already exists in the file!!!"),400
     return my_tasks_list
 
 
-@app.route("/delete_task/<identifier>",methods=["DELETE"])
-def deleting_task(identifier):
+@app.route("/delete_task",methods=["DELETE"])
+def deleting_task():
     index=0
+    identifier=request.form.get('Identificador')
     for index in range(0,len(my_tasks_list)):
         if my_tasks_list[index]["Identificador"]==identifier:
             my_tasks_list.pop(index)
