@@ -5,7 +5,7 @@ my_tasks_list=[]
 
 app=Flask(__name__)
 
-@app.route("/list_tasks")
+@app.route("/task")
 def get_task():
 
 
@@ -62,15 +62,14 @@ def create_task():
     except Exception as err:
         return jsonify(message="This value already exists in the File!!!"),400
 
-@app.route("/edit_task",methods=["PUT"])
-def edit_task():
-    identifier=request.form.get('Identificador')
-    field_name=request.form.get('Nombre_campo')
-    new_value=request.form.get('Nuevo_Valor')
+@app.route("/task/<id_task>",methods=["PUT"])
+def edit_task(id_task):
+    field_name=request.form.get('nombre_campo')
+    new_value=request.form.get('nuevo_valor')
 
     my_boolean=False
     try:
-        if identifier=="":
+        if id_task=="":
             raise ValueError("Identifier value is missing")
         if field_name=="":
             raise ValueError("field name value is missing")
@@ -84,7 +83,7 @@ def edit_task():
                     if new_value != "Por Hacer" and new_value != "En Progreso" and new_value != "Completada":
                         raise ValueError("Status value is not valid")
         for record in my_tasks_list:
-            if record["Identificador"]==identifier:
+            if record["Identificador"]==id_task:
                 record[field_name]=new_value
                 my_boolean=True
         if my_boolean==False:
@@ -98,12 +97,11 @@ def edit_task():
     return my_tasks_list
 
 
-@app.route("/delete_task",methods=["DELETE"])
-def deleting_task():
+@app.route("/task/<id_task>",methods=["DELETE"])
+def deleting_task(id_task):
     index=0
-    identifier=request.form.get('Identificador')
     for index in range(0,len(my_tasks_list)):
-        if my_tasks_list[index]["Identificador"]==identifier:
+        if my_tasks_list[index]["Identificador"]==id_task:
             my_tasks_list.pop(index)
     return my_tasks_list
 

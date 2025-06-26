@@ -60,13 +60,12 @@ class ItemAPI(MethodView):
         except Exception as err:
             return jsonify(message="This value already exists in the file!!!"),400
 
-    def put(self):
+    def put(self,id_task):
         my_boolean=False
-        identifier=request.form.get('Identificador')
         field_name=request.form.get('Nombre_campo')
         new_value=request.form.get('Nuevo_valor')
         try:
-            if identifier=="":
+            if id_task=="":
                 raise ValueError("Identifier value is missing")
             if field_name=="":
                 raise ValueError("field name value is missing")
@@ -80,7 +79,7 @@ class ItemAPI(MethodView):
                 if new_value != "Por Hacer" and new_value != "En Progreso" and new_value != "Completada":
                     raise ValueError("Status value is not valid")
             for record in my_tasks_list:
-                if record["Identificador"]==identifier:
+                if record["Identificador"]==id_task:
                     record[field_name]=new_value
                     my_boolean=True
                     if my_boolean==False:
@@ -94,19 +93,18 @@ class ItemAPI(MethodView):
         return my_tasks_list
     
     
-    def delete(self):
-        identifier=request.form.get('Identificador')
+    def delete(self,id_task):
         index=0
         for index in range(0,len(my_tasks_list)):
-            if my_tasks_list[index]["Identificador"]==identifier:
+            if my_tasks_list[index]["Identificador"]==id_task:
                 my_tasks_list.pop(index)
         return my_tasks_list
 
 item=ItemAPI.as_view('task_api')
-app.add_url_rule('/list_tasks', view_func=item, methods=['GET'])
+app.add_url_rule('/task', view_func=item, methods=['GET'])
 app.add_url_rule('/task',view_func=item,methods=['POST'])
-app.add_url_rule('/edit_task',view_func=item,methods=['PUT'])
-app.add_url_rule('/delete_task',view_func=item,methods=['DELETE'])
+app.add_url_rule('/task/<id_task>',view_func=item,methods=['PUT'])
+app.add_url_rule('/task/<id_task>',view_func=item,methods=['DELETE'])
 
 
 if __name__ == '__main__':
