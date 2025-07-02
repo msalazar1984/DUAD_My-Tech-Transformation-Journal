@@ -1,7 +1,7 @@
 -- SQLite
-ALTER TABLE facturas
-    ADD telefono_comprador INT;
+ALTER TABLE invoices
+    ADD customer_phone_number INT;
 
 
-ALTER TABLE facturas
-    ADD cod_empleado;
+ALTER TABLE invoices
+    ADD employee_code INT;
