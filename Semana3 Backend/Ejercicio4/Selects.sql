@@ -1,35 +1,35 @@
 -- SQLite
-SELECT id,nombre_producto 
-    FROM productos;
+SELECT id,product_name 
+    FROM products;
 
 
-SELECT id,nombre_producto,precio
-    FROM productos
-    WHERE precio>50000;
+SELECT id,product_name,product_price
+    FROM products
+    WHERE product_price>50000;
 
 
-SELECT  product_id, COUNT(*) AS total_compras
-    FROM shopping_carts_products
+SELECT  product_id,product_name,quantity_purchased
+    FROM shopping_carts_products,products
+    WHERE products.id=shopping_carts_products.product_id and products.id=1;
+
+
+SELECT  product_id, SUM(quantity_purchased*product_price) AS total
+    FROM shopping_carts_products,products
+    WHERE product_id=products.id
     GROUP BY product_id;
 
 
-SELECT  product_id, SUM(cantidad_comprada*precio) AS monto_total_compras
-    FROM shopping_carts_products,productos
-    WHERE product_id=productos.id
-    GROUP BY product_id;
+SELECT id , user_email, purchase_date
+    FROM invoices
+    WHERE user_email='miguelsarojas@gmail.com';
 
 
-SELECT email_comprador , COUNT(*) AS total_facturas
-    FROM facturas
-    GROUP BY email_comprador;
+SELECT id,total_paid
+    FROM invoices
+    ORDER BY total_paid DESC;
 
 
-SELECT id,monto_total
-    FROM facturas
-    ORDER BY monto_total DESC;
-
-
-SELECT ROW_NUMBER() OVER (ORDER BY email_comprador) AS facturatotal_id ,email_comprador,SUM(monto_total) AS monto_total_facturado
-    FROM facturas
-    GROUP BY email_comprador;
+SELECT ROW_NUMBER() OVER (ORDER BY user_email) AS totalinvoice_id ,user_email,SUM(total_paid) AS invoice_total_amount
+    FROM invoices
+    GROUP BY user_email;
 
