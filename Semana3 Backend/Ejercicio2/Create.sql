@@ -18,8 +18,8 @@ CREATE TABLE products(
 
 CREATE TABLE products_invoices(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_id INT REFERENCES productos(id),
-    invoice_id INT REFERENCES facturas(id),
+    product_id INT REFERENCES products(id),
+    invoice_id INT REFERENCES invoices(id),
     quantity_purchased INT,
     total_paid REAL);
 
@@ -36,7 +36,7 @@ CREATE TABLE shopping_carts(
 CREATE TABLE shopping_carts_products(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     shopping_cart_id INT REFERENCES shopping_carts(id),
-    product_id INT REFERENCES productos(id),
+    product_id INT REFERENCES products(id),
     quantity_purchased INT);
 
 

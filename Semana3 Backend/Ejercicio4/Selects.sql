@@ -29,7 +29,7 @@ SELECT id,total_paid
     ORDER BY total_paid DESC;
 
 
-SELECT ROW_NUMBER() OVER (ORDER BY user_email) AS totalinvoice_id ,user_email,SUM(total_paid) AS invoice_total_amount
+SELECT *
     FROM invoices
-    GROUP BY user_email;
+    WHERE id=1;
 
