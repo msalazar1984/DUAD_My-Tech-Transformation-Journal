@@ -1,7 +1,7 @@
 -- SQLite
 SELECT Books.ID, Books.Name, Authors.Name 
     FROM Books
-    INNER JOIN Authors
+    LEFT JOIN Authors
     ON Books.Author=Authors.ID;
 
 SELECT Books.ID, Books.Name, Authors.Name 
@@ -14,7 +14,7 @@ SELECT Authors.ID, Authors.Name, Books.Name
     FROM Authors
     LEFT JOIN Books
     ON Books.Author=Authors.ID
-    WHERE Books.Name IS NULL;
+    WHERE Books.ID IS NULL;
 
 SELECT DISTINCT Rents.BookID,Books.Name
     FROM Rents
