@@ -2,9 +2,9 @@ from flask.views import MethodView
 from flask import Flask,request,jsonify
 import json
 from datetime import date
-from repositories import UserRepository
-from repositories import VehiculeRepository
-from repositories import RentalRepository
+from user_repository import UserRepository
+from vehicule_repository import VehiculeRepository
+from rental_repository import RentalRepository
 from db import PgManager
 
 db_manager=PgManager(

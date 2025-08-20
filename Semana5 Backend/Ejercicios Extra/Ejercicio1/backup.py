@@ -1,6 +1,6 @@
-from repositories import UserRepository
-from repositories import VehiculeRepository
-from repositories import RentalRepository
+from user_repository import UserRepository
+from vehicule_repository import VehiculeRepository
+from rental_repository import RentalRepository
 from db import PgManager
 import csv
 from datetime import date
@@ -80,6 +80,7 @@ def writting_to_csv_vehicules():
             raise ex
     except ValueError as ex:
         print("El archivo se encuentra vacio")
+
 
 def writting_to_csv_rentals():
     try:
