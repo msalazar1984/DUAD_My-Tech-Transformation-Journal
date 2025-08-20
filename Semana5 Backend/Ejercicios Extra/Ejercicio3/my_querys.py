@@ -1,6 +1,6 @@
-from repositories import UserRepository
-from repositories import VehiculeRepository
-from repositories import RentalRepository
+from user_repository import UserRepository
+from vehicule_repository import VehiculeRepository
+from rental_repository import RentalRepository
 from db import PgManager
 from faker import Faker
 import random
